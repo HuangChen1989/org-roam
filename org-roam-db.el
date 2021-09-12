@@ -82,10 +82,10 @@ slow."
 (defconst org-roam-db-version 17)
 
 ;; TODO Rename this
-(defconst org-roam--sqlite-available-p
-  (with-demoted-errors "Org-roam initialization: %S"
-    (emacsql-sqlite-ensure-binary)
-    t))
+;; (defconst org-roam--sqlite-available-p
+;;   (with-demoted-errors "Org-roam initialization: %S"
+;;     (emacsql-sqlite-ensure-binary)
+;;     t))
 
 (defvar org-roam-db--connection (make-hash-table :test #'equal)
   "Database connection to Org-roam database.")
@@ -104,7 +104,7 @@ Performs a database upgrade when required."
                (emacsql-live-p (org-roam-db--get-connection)))
     (let ((init-db (not (file-exists-p org-roam-db-location))))
       (make-directory (file-name-directory org-roam-db-location) t)
-      (let ((conn (emacsql-sqlite org-roam-db-location)))
+      (let ((conn (emacsql-sqlite3 org-roam-db-location)))
         (set-process-query-on-exit-flag (emacsql-process conn) nil)
         (puthash (expand-file-name org-roam-directory)
                  conn

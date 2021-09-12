@@ -81,7 +81,7 @@
 (require 'magit-section)
 
 (require 'emacsql)
-(require 'emacsql-sqlite)
+(require 'emacsql-sqlite3)
 
 (require 'org)
 (require 'org-id)
